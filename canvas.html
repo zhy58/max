@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        canvas{
+            /*width: 500px;*/
+            height: 500px;
+            margin: 50px 100px;
+            border: 1px solid rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canv"></canvas>
+
+<script>
+//    CanvasRenderingContext2D.prototype.sector = function(x,y,r,angle1,angle2){
+//        this.save();
+//        this.beginPath();
+//        this.moveTo(x,y);
+//        this.arc(x,y,r,angle1*Math.PI/180,angle2*Math.PI/180,false);
+//        this.closePath();
+//        this.restore();
+//        return this;
+//    }
+CanvasRenderingContext2D.prototype.sector = function(x,y,r,angle1,angle2){
+    this.save();
+    this.beginPath();
+    this.moveTo(x,y);
+    this.arc(x,y,r,angle1*Math.PI/180,angle2*Math.PI/180,false);
+    this.closePath();
+    this.restore();
+    return this;
+}
+    var angle = 0;
+    var timer = null;
+    var canvas=document.getElementById("canv");
+    var ctx=canvas.getContext("2d");
+    timer=setInterval(function(){
+        angle+=0.5;
+        console.log(angle);
+        ctx.fillStyle = 'green';
+        ctx.sector(50,50,50,0,angle).fill();
+        ctx.fillStyle = '#fff';
+        ctx.sector(50,50,30,0,360).fill();
+        if(angle == 35){
+            console.log(123);
+            clearInterval(timer);
+        }
+
+    },20);
+</script>
+</body>
+</html>
